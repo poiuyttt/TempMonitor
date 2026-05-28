@@ -124,6 +124,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\AppConfig.cs" />
+    <Compile Include="Data\DatabaseService.cs" />
+    <Compile Include="Models\AlarmRecord.cs" />
+    <Compile Include="Models\OperationLog.cs" />
+    <Compile Include="Models\SensorData.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Presentation\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,9 +162,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Config\" />
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Service\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
