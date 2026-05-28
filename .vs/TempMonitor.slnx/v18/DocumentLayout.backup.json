@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\TempMonitor\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|d:\\tempmonitor\\tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Presentation\\MainForm.cs",
+              "RelativeDocumentMoniker": "TempMonitor\\Presentation\\MainForm.cs",
+              "ToolTip": "D:\\TempMonitor\\TempMonitor\\Presentation\\MainForm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "TempMonitor\\Presentation\\MainForm.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T12:47:01.905Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
