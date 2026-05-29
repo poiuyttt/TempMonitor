@@ -138,6 +138,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\AlarmService.cs" />
+    <Compile Include="Service\ExportService.cs" />
+    <Compile Include="Service\Interfaces\IAlarmService.cs" />
+    <Compile Include="Service\Interfaces\IExportService.cs" />
+    <Compile Include="Service\Interfaces\IModbusService.cs" />
+    <Compile Include="Service\Interfaces\IOperationLogService.cs" />
+    <Compile Include="Service\Interfaces\IUserService.cs" />
+    <Compile Include="Service\ModbusService.cs" />
+    <Compile Include="Service\OperationLogService.cs" />
+    <Compile Include="Service\UserService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -161,9 +171,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
