@@ -87,7 +87,7 @@ namespace TempMonitor.Service
 
                         try
                         {
-                            byte[] cmd = { 0x01, 0x03, 0x00, 0x00, 0x00, 0x02, 0xC4, 0x0B };
+                            byte[] cmd = { 0x01, 0x03, 0x03, 0x00, 0x00, 0x02, 0xC4, 0x4F };
                             _serialPort.Write(cmd, 0, cmd.Length);
                             Thread.Sleep(100);
 

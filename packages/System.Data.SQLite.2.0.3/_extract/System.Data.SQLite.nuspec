@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>System.Data.SQLite</id>
+    <version>2.0.3</version>
+    <title>System.Data.SQLite</title>
+    <authors>System.Data.SQLite</authors>
+    <description>ADO.NET Data Provider for SQLite</description>
+    <copyright>Public Domain</copyright>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.1" />
+      <group targetFramework=".NETStandard2.0" />
+      <group targetFramework=".NETStandard2.1" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Data" targetFramework=".NETFramework4.7.1" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.7.1" />
+      <frameworkAssembly assemblyName="System.Transactions" targetFramework=".NETFramework4.7.1" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework=".NETFramework4.7.1" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

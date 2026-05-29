@@ -156,28 +156,38 @@
             // 
             // numTempHigh
             // 
+            this.numTempHigh.DecimalPlaces = 1;
             this.numTempHigh.Location = new System.Drawing.Point(89, 19);
+            this.numTempHigh.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
+            this.numTempHigh.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             this.numTempHigh.Name = "numTempHigh";
             this.numTempHigh.Size = new System.Drawing.Size(49, 21);
             this.numTempHigh.TabIndex = 4;
             // 
             // numTempLow
             // 
+            this.numTempLow.DecimalPlaces = 1;
             this.numTempLow.Location = new System.Drawing.Point(220, 20);
+            this.numTempLow.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
+            this.numTempLow.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             this.numTempLow.Name = "numTempLow";
             this.numTempLow.Size = new System.Drawing.Size(49, 21);
             this.numTempLow.TabIndex = 5;
             // 
             // numHumidHigh
             // 
+            this.numHumidHigh.DecimalPlaces = 1;
             this.numHumidHigh.Location = new System.Drawing.Point(89, 54);
+            this.numHumidHigh.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
             this.numHumidHigh.Name = "numHumidHigh";
             this.numHumidHigh.Size = new System.Drawing.Size(49, 21);
             this.numHumidHigh.TabIndex = 6;
             // 
             // numHumidLow
             // 
+            this.numHumidLow.DecimalPlaces = 1;
             this.numHumidLow.Location = new System.Drawing.Point(220, 54);
+            this.numHumidLow.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
             this.numHumidLow.Name = "numHumidLow";
             this.numHumidLow.Size = new System.Drawing.Size(49, 21);
             this.numHumidLow.TabIndex = 7;
@@ -211,6 +221,8 @@
             // numInterval
             // 
             this.numInterval.Location = new System.Drawing.Point(212, 27);
+            this.numInterval.Maximum = new decimal(new int[] { 3600000, 0, 0, 0 });
+            this.numInterval.Minimum = new decimal(new int[] { 100, 0, 0, 0 });
             this.numInterval.Name = "numInterval";
             this.numInterval.Size = new System.Drawing.Size(57, 21);
             this.numInterval.TabIndex = 3;
