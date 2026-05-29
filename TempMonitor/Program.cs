@@ -36,6 +36,20 @@ namespace TempMonitor
 
             // 组装依赖
             var config = new AppConfig();
+            string configPath = System.IO.Path.Combine(
+                System.AppDomain.CurrentDomain.BaseDirectory,
+                "appsettings.json"
+            );
+            if (System.IO.File.Exists(configPath))
+            {
+                string json = System.IO.File.ReadAllText(configPath);
+                var loaded =
+                    new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<AppConfig>(
+                        json
+                    );
+                if (loaded != null)
+                    config = loaded;
+            }
             var db = new DatabaseService();
             var modbus = new ModbusService();
             var alarm = new AlarmService(db);

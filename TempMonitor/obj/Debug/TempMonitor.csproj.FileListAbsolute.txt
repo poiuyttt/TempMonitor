@@ -76,3 +76,4 @@ D:\TempMonitor\TempMonitor\obj\Debug\TempMoni.724C7FAA.Up2Date
 D:\TempMonitor\TempMonitor\obj\Debug\TempMonitor.exe
 D:\TempMonitor\TempMonitor\obj\Debug\TempMonitor.pdb
 D:\TempMonitor\TempMonitor\obj\Debug\TempMonitor.MainForm.resources
+D:\TempMonitor\TempMonitor\bin\Debug\appsettings.json
