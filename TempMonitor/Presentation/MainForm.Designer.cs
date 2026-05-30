@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panelTemp = new System.Windows.Forms.Panel();
             this.lblTempLabel = new System.Windows.Forms.Label();
             this.lblTempValue = new System.Windows.Forms.Label();
@@ -53,6 +53,7 @@
             this.cmbBaudRate = new System.Windows.Forms.ComboBox();
             this.cmbPortName = new System.Windows.Forms.ComboBox();
             this.chartTemp = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnHistory = new System.Windows.Forms.Button();
             this.panelTemp.SuspendLayout();
             this.panelHumid.SuspendLayout();
             this.panelStatus.SuspendLayout();
@@ -162,6 +163,7 @@
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.btnHistory);
             this.panelBottom.Controls.Add(this.statusStrip1);
             this.panelBottom.Controls.Add(this.txtLog);
             this.panelBottom.Controls.Add(this.btnSettings);
@@ -212,7 +214,7 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.Location = new System.Drawing.Point(558, 4);
+            this.btnSettings.Location = new System.Drawing.Point(558, 55);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(75, 23);
             this.btnSettings.TabIndex = 5;
@@ -276,20 +278,30 @@
             // 
             // chartTemp
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartTemp.ChartAreas.Add(chartArea3);
+            chartArea2.Name = "ChartArea1";
+            this.chartTemp.ChartAreas.Add(chartArea2);
             this.chartTemp.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chartTemp.Legends.Add(legend3);
+            legend2.Name = "Legend1";
+            this.chartTemp.Legends.Add(legend2);
             this.chartTemp.Location = new System.Drawing.Point(0, 120);
             this.chartTemp.Name = "chartTemp";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartTemp.Series.Add(series3);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartTemp.Series.Add(series2);
             this.chartTemp.Size = new System.Drawing.Size(645, 374);
             this.chartTemp.TabIndex = 6;
             this.chartTemp.Text = "chart1";
+            // 
+            // btnHistory
+            // 
+            this.btnHistory.Location = new System.Drawing.Point(558, 4);
+            this.btnHistory.Name = "btnHistory";
+            this.btnHistory.Size = new System.Drawing.Size(75, 23);
+            this.btnHistory.TabIndex = 8;
+            this.btnHistory.Text = "历史数据";
+            this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // MainForm
             // 
@@ -341,6 +353,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblConnection;
         private System.Windows.Forms.ToolStripStatusLabel lblTime;
+        private System.Windows.Forms.Button btnHistory;
     }
 }
 

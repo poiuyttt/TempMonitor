@@ -205,6 +205,12 @@ namespace TempMonitor
             }
         }
 
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            using (var form = new HistoryForm(_db, _export))
+                form.ShowDialog();
+        }
+
         private void btnSettings_Click(object sender, System.EventArgs e)
         {
             using (var form = new SettingsForm(_config, _log, _user.CurrentUser?.Username))
