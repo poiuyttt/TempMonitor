@@ -52,9 +52,7 @@ namespace TempMonitor
                         string msg = $"{record.AlarmType}！当前：{record.AlarmValue}，级别：{record.Level}";
                         AppendLog("报警：" + msg);
                         var result = MessageBox.Show(
-                            msg + "
-
-点击「确定」确认此报警，点击「取消」稍后处理",
+                            msg + "\r\n\r\n点击「确定」确认此报警，点击「取消」稍后处理",
                             "报警",
                             MessageBoxButtons.OKCancel,
                             MessageBoxIcon.Warning
@@ -119,35 +117,30 @@ namespace TempMonitor
 
         private void OnDataReceived(SensorData data)
         {
-            BeginInvoke(
-                new Action(() =>
-                {
-                    lblTempValue.Text = $"{data.Temperature:F1}";
-                    lblHumidValue.Text = $"{data.Humidity:F1}";
-                    UpdateChart(data);
-                    UpdateStatusColor(data);
+            lblTempValue.Text = $"{data.Temperature:F1}";
+            lblHumidValue.Text = $"{data.Humidity:F1}";
+            UpdateChart(data);
+            UpdateStatusColor(data);
 
-                    try
-                    {
-                        _db.InsertSensorData(data.Temperature, data.Humidity);
-                    }
-                    catch (Exception ex)
-                    {
-                        AppendLog($"数据库写入失败：{ex.Message}");
-                    }
+            try
+            {
+                _db.InsertSensorData(data.Temperature, data.Humidity);
+            }
+            catch (Exception ex)
+            {
+                AppendLog($"数据库写入失败：{ex.Message}");
+            }
 
-                    _alarm.Check(
-                        data.Temperature,
-                        data.Humidity,
-                        _config.TempAlarmHigh,
-                        _config.TempAlarmLow,
-                        _config.HumidAlarmHigh,
-                        _config.HumidAlarmLow
-                    );
-
-                    AppendLog($"温度：{data.Temperature}℃  湿度：{data.Humidity}%");
-                })
+            _alarm.Check(
+                data.Temperature,
+                data.Humidity,
+                _config.TempAlarmHigh,
+                _config.TempAlarmLow,
+                _config.HumidAlarmHigh,
+                _config.HumidAlarmLow
             );
+
+            AppendLog($"温度：{data.Temperature}℃  湿度：{data.Humidity}%");
         }
 
         private void OnStatusChanged(string status)

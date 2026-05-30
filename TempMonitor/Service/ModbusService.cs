@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
 using TempMonitor.Models;
 using TempMonitor.Service.Interfaces;
+using Timer = System.Windows.Forms.Timer;
 
 namespace TempMonitor.Service
 {
@@ -16,6 +18,8 @@ namespace TempMonitor.Service
         private SerialPort _serialPort;
         private CancellationTokenSource _cts;
         private Task _connectTask;
+        private ConcurrentQueue<SensorData> _dataQueue = new ConcurrentQueue<SensorData>();
+        private Timer _consumeTimer;
 
         public bool IsConnceted => _serialPort != null && _serialPort.IsOpen;
 
@@ -34,6 +38,15 @@ namespace TempMonitor.Service
                 // 启动后台采集循环
                 _cts = new CancellationTokenSource();
                 _connectTask = Task.Run(() => CollectLoop(_cts.Token));
+
+                _consumeTimer = new Timer();
+                _consumeTimer.Interval = 500;
+                _consumeTimer.Tick += (s, e) =>
+                {
+                    if (_dataQueue.TryDequeue(out SensorData data))
+                        OnDataReceived?.Invoke(data);
+                };
+                _consumeTimer.Start();
             }
             catch (Exception ex)
             {
@@ -69,7 +82,7 @@ namespace TempMonitor.Service
 
         /// <summary>
         /// 每秒发一次 Modbus 03 命令，读取温度+湿度
-        /// Modbus命令：01   03   00 00    00 02      C4 0B
+        /// Modbus命令：01   03   03 00    00 02      C4 4F
         ///            └地址 └功能码 └起始地址0 └读2个寄存器 └CRC
         /// </summary>
         private async Task CollectLoop(CancellationToken token)
@@ -111,7 +124,7 @@ namespace TempMonitor.Service
                                     RecordTime = DateTime.Now,
                                 };
 
-                                OnDataReceived(data);
+                                _dataQueue.Enqueue(data);
                             }
                         }
                         catch (Exception ex)

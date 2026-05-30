@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "D:\\TempMonitor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|d:\\tempmonitor\\tempmonitor\\service\\alarmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\service\\alarmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|d:\\tempmonitor\\tempmonitor\\data\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\data\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|d:\\tempmonitor\\tempmonitor\\models\\alarmrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\models\\alarmrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\service\\modbusservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\service\\modbusservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\service\\modbusservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\service\\modbusservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|d:\\tempmonitor\\tempmonitor\\service\\alarmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\service\\alarmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\data\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\data\\databaseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\models\\alarmrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\models\\alarmrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\presentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "DatabaseService.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Data\\DatabaseService.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Data\\DatabaseService.cs",
@@ -67,7 +67,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "AlarmRecord.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Models\\AlarmRecord.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Models\\AlarmRecord.cs",
@@ -80,7 +80,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "AlarmService.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Service\\AlarmService.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Service\\AlarmService.cs",
@@ -93,20 +93,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "ModbusService.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Service\\ModbusService.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Service\\ModbusService.cs",
               "ToolTip": "D:\\TempMonitor\\TempMonitor\\Service\\ModbusService.cs",
               "RelativeToolTip": "TempMonitor\\Service\\ModbusService.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAkwCMAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAswCYAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-29T13:20:01.313Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Program.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Program.cs",
@@ -119,20 +119,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "MainForm.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Presentation\\MainForm.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Presentation\\MainForm.cs",
               "ToolTip": "D:\\TempMonitor\\TempMonitor\\Presentation\\MainForm.cs",
               "RelativeToolTip": "TempMonitor\\Presentation\\MainForm.cs",
-              "ViewState": "AgIAAKkAAAAAAAAAAIAzwLIAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAxwJwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-29T11:00:05.729Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "MainForm.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Presentation\\MainForm.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Presentation\\MainForm.cs",
