@@ -162,20 +162,35 @@ namespace TempMonitor.Data
             return null;
         }
 
-        /// <summary>插入一条报警记录</summary>
-        public void InsertAlarmRecord(AlarmRecord record)
+        /// <summary>插入一条报警记录，返回新记录的 Id</summary>
+        public int InsertAlarmRecord(AlarmRecord record)
         {
             using (var conn = new SQLiteConnection(_connectionString))
             {
                 conn.Open();
                 var cmd = new SQLiteCommand(
-                    "INSERT INTO AlarmRecords (AlarmType, AlarmValue, Level, RecordTime, Confirmed) VALUES (@type, @value, @level, @time, 0)",
+                    "INSERT INTO AlarmRecords (AlarmType, AlarmValue, Level, RecordTime, Confirmed) VALUES (@type, @value, @level, @time, 0); SELECT last_insert_rowid();",
                     conn
                 );
                 cmd.Parameters.AddWithValue("@type", record.AlarmType);
                 cmd.Parameters.AddWithValue("@value", record.AlarmValue);
                 cmd.Parameters.AddWithValue("@level", record.Level);
                 cmd.Parameters.AddWithValue("@time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        /// <summary>确认报警记录</summary>
+        public void ConfirmAlarm(int alarmId)
+        {
+            using (var conn = new SQLiteConnection(_connectionString))
+            {
+                conn.Open();
+                var cmd = new SQLiteCommand(
+                    "UPDATE AlarmRecords SET Confirmed = 1 WHERE Id = @id",
+                    conn
+                );
+                cmd.Parameters.AddWithValue("@id", alarmId);
                 cmd.ExecuteNonQuery();
             }
         }

@@ -8,7 +8,7 @@ namespace TempMonitor.Service
 {
     public class AlarmService : IAlarmService
     {
-        public event Action<string> OnAlarmTriggered;
+        public event Action<AlarmRecord> OnAlarmTriggered;
 
         private readonly DatabaseService _db;
         private readonly Dictionary<string, DateTime> _lastAlarmTime =
@@ -59,10 +59,9 @@ namespace TempMonitor.Service
                 RecordTime = DateTime.Now,
             };
 
-            _db.InsertAlarmRecord(record);
+            record.Id = _db.InsertAlarmRecord(record);
 
-            string msg = $"{type}超限！当前：{value}，阈值：[{low}~{high}]";
-            OnAlarmTriggered?.Invoke(msg);
+            OnAlarmTriggered?.Invoke(record);
         }
     }
 }

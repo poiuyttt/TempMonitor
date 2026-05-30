@@ -3,7 +3,11 @@
   "WorkspaceRootPath": "D:\\TempMonitor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|d:\\tempmonitor\\tempmonitor\\models\\userinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|d:\\tempmonitor\\tempmonitor\\service\\alarmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\service\\alarmservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|D:\\TempMonitor\\tempmonitor\\models\\userinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{428ED17B-AA1B-4F6C-9A66-4FD6A4B363A7}|TempMonitor\\TempMonitor.csproj|solutionrelative:tempmonitor\\models\\userinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -75,6 +79,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AlarmService.cs",
+              "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Service\\AlarmService.cs",
+              "RelativeDocumentMoniker": "TempMonitor\\Service\\AlarmService.cs",
+              "ToolTip": "D:\\TempMonitor\\TempMonitor\\Service\\AlarmService.cs",
+              "RelativeToolTip": "TempMonitor\\Service\\AlarmService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-30T03:26:02.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "UserInfo.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Models\\UserInfo.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Models\\UserInfo.cs",
@@ -87,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SensorData.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Models\\SensorData.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Models\\SensorData.cs",
@@ -100,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "OperationLog.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Models\\OperationLog.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Models\\OperationLog.cs",
@@ -113,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "AlarmRecord.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Models\\AlarmRecord.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Models\\AlarmRecord.cs",
@@ -126,7 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "IModbusService.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Service\\Interfaces\\IModbusService.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Service\\Interfaces\\IModbusService.cs",
@@ -139,7 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "DatabaseService.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Data\\DatabaseService.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Data\\DatabaseService.cs",
@@ -152,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "AppConfig.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Config\\AppConfig.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Config\\AppConfig.cs",
@@ -165,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\appsettings.json",
               "RelativeDocumentMoniker": "TempMonitor\\appsettings.json",
@@ -178,7 +195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ModbusService.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Service\\ModbusService.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Service\\ModbusService.cs",
@@ -191,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Program.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Program.cs",
@@ -204,7 +221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "MainForm.cs",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Presentation\\MainForm.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Presentation\\MainForm.cs",
@@ -217,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "MainForm.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\TempMonitor\\TempMonitor\\Presentation\\MainForm.cs",
               "RelativeDocumentMoniker": "TempMonitor\\Presentation\\MainForm.cs",

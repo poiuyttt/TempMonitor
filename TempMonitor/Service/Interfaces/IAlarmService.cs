@@ -1,10 +1,11 @@
 ﻿using System;
+using TempMonitor.Models;
 
 namespace TempMonitor.Service.Interfaces
 {
     public interface IAlarmService
     {
-        event Action<string> OnAlarmTriggered;
+        event Action<AlarmRecord> OnAlarmTriggered;
 
         void Check(
             double temperature,

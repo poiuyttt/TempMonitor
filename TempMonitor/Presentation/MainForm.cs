@@ -45,12 +45,25 @@ namespace TempMonitor
             _modbus.OnDataReceived += OnDataReceived;
             _modbus.OnStatusChanged += OnStatusChanged;
             _modbus.OnLogProduced += msg => BeginInvoke(new Action(() => AppendLog(msg)));
-            _alarm.OnAlarmTriggered += msg =>
+            _alarm.OnAlarmTriggered += record =>
                 BeginInvoke(
                     new Action(() =>
                     {
+                        string msg = $"{record.AlarmType}！当前：{record.AlarmValue}，级别：{record.Level}";
                         AppendLog("报警：" + msg);
-                        MessageBox.Show(msg, "报警", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        var result = MessageBox.Show(
+                            msg + "
+
+点击「确定」确认此报警，点击「取消」稍后处理",
+                            "报警",
+                            MessageBoxButtons.OKCancel,
+                            MessageBoxIcon.Warning
+                        );
+                        if (result == DialogResult.OK)
+                        {
+                            _db.ConfirmAlarm(record.Id);
+                            AppendLog($"报警已确认：ID={record.Id}");
+                        }
                     })
                 );
 
