@@ -29,7 +29,7 @@ namespace TempMonitor.Service
         )
         {
             CheckOne("温度", temperature, tempHigh, tempLow);
-            CheckOne("湿度", humidity, humidity, humidLow);
+            CheckOne("湿度", humidity, humidHigh, humidLow);
         }
 
         private void CheckOne(string type, double value, double high, double low)

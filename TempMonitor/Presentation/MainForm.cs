@@ -22,7 +22,6 @@ namespace TempMonitor
 
         private Timer _statusTimer;
         private DateTime _startTime;
-        private int _dataCount;
 
         public MainForm(
             IModbusService modbus,
@@ -45,7 +44,7 @@ namespace TempMonitor
 
             _modbus.OnDataReceived += OnDataReceived;
             _modbus.OnStatusChanged += OnStatusChanged;
-            _modbus.OnLogProduced += msg => AppendLog(msg);
+            _modbus.OnLogProduced += msg => BeginInvoke(new Action(() => AppendLog(msg)));
             _alarm.OnAlarmTriggered += msg =>
                 BeginInvoke(
                     new Action(() =>
@@ -115,8 +114,14 @@ namespace TempMonitor
                     UpdateChart(data);
                     UpdateStatusColor(data);
 
-                    _db.InsertSensorData(data.Temperature, data.Humidity);
-                    _dataCount++;
+                    try
+                    {
+                        _db.InsertSensorData(data.Temperature, data.Humidity);
+                    }
+                    catch (Exception ex)
+                    {
+                        AppendLog($"数据库写入失败：{ex.Message}");
+                    }
 
                     _alarm.Check(
                         data.Temperature,
@@ -197,10 +202,17 @@ namespace TempMonitor
                 dlg.FileName = $"温湿度_{DateTime.Now:yyyyMMdd}.xlsx";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    var data = _db.QuerySensorData(DateTime.Now.AddDays(-1), DateTime.Now);
-                    _export.ExportToExcel(dlg.FileName, data);
-                    _log.Log(_user.CurrentUser?.Username, "导出Excel");
-                    AppendLog($"已导出 {data.Count} 条数据");
+                    try
+                    {
+                        var data = _db.QuerySensorData(DateTime.Now.AddDays(-1), DateTime.Now);
+                        _export.ExportToExcel(dlg.FileName, data);
+                        _log.Log(_user.CurrentUser?.Username ?? "", "导出Excel");
+                        AppendLog($"已导出 {data.Count} 条数据");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"导出失败：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -224,7 +236,7 @@ namespace TempMonitor
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            _modbus.Stop();
+            try { _modbus.Stop(); } catch { /* 关闭时忽略清理异常 */ }
             base.OnFormClosing(e);
         }
     }

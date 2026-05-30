@@ -62,7 +62,6 @@ namespace TempMonitor
 
             if (loginForm.LoginSuccess)
             {
-                // 进入主界面（依赖注入）
                 Application.Run(new MainForm(modbus, alarm, export, db, user, log, config));
             }
         }
