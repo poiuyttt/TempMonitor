@@ -62,7 +62,7 @@ namespace TempMonitor
 
             if (loginForm.LoginSuccess)
             {
-                Application.Run(new MainForm(modbus, alarm, export, db, user, log, config));
+                Application.Run(new MainForm(modbus, alarm, export, user, log, db, config));
             }
         }
     }

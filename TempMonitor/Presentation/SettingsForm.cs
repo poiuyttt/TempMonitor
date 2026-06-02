@@ -118,6 +118,29 @@ namespace TempMonitor.Presentation
             _config.Interval = (int)numInterval.Value;
             _config.PortName = cmbPortName.Text;
 
+            // 保存配置到 appsettings.json
+            try
+            {
+                string configPath = System.IO.Path.Combine(
+                    System.AppDomain.CurrentDomain.BaseDirectory,
+                    "appsettings.json"
+                );
+                string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(
+                    _config
+                );
+                System.IO.File.WriteAllText(configPath, json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"保存配置文件失败：{ex.Message}",
+                    "错误",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
             _logService.Log(_currentUser, "修改配置");
             MessageBox.Show("设置已保存", "提示");
         }

@@ -15,9 +15,9 @@ namespace TempMonitor
         private readonly IModbusService _modbus;
         private readonly IAlarmService _alarm;
         private readonly IExportService _export;
-        private readonly DatabaseService _db;
         private readonly IUserService _user;
         private readonly IOperationLogService _log;
+        private readonly DatabaseService _db;
         private readonly AppConfig _config;
 
         private Timer _statusTimer;
@@ -27,9 +27,9 @@ namespace TempMonitor
             IModbusService modbus,
             IAlarmService alarm,
             IExportService export,
-            DatabaseService db,
             IUserService user,
             IOperationLogService log,
+            DatabaseService db,
             AppConfig config
         )
         {
@@ -49,7 +49,8 @@ namespace TempMonitor
                 BeginInvoke(
                     new Action(() =>
                     {
-                        string msg = $"{record.AlarmType}！当前：{record.AlarmValue}，级别：{record.Level}";
+                        string msg =
+                            $"{record.AlarmType}！当前：{record.AlarmValue}，级别：{record.Level}";
                         AppendLog("报警：" + msg);
                         var result = MessageBox.Show(
                             msg + "\r\n\r\n点击「确定」确认此报警，点击「取消」稍后处理",
@@ -89,11 +90,14 @@ namespace TempMonitor
 
         private void InitChart()
         {
-            var area = new ChartArea();
+            // 复用设计器已有的 ChartArea（避免重复添加）
+            var area = chartTemp.ChartAreas[0];
             area.AxisY.Title = "温度 (℃)";
             area.AxisY2.Title = "湿度 (%)";
             area.AxisX.LabelStyle.Format = "HH:mm:ss";
-            chartTemp.ChartAreas.Add(area);
+
+            // 清除设计器生成的空默认 Series
+            chartTemp.Series.Clear();
 
             var seriesTemp = new Series
             {
@@ -217,7 +221,12 @@ namespace TempMonitor
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"导出失败：{ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(
+                            $"导出失败：{ex.Message}",
+                            "错误",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
                     }
                 }
             }
@@ -242,7 +251,13 @@ namespace TempMonitor
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            try { _modbus.Stop(); } catch { /* 关闭时忽略清理异常 */ }
+            try
+            {
+                _modbus.Stop();
+            }
+            catch
+            { /* 关闭时忽略清理异常 */
+            }
             base.OnFormClosing(e);
         }
     }
