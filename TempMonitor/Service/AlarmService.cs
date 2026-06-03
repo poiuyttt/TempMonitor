@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TempMonitor.Data;
 using TempMonitor.Models;
@@ -49,7 +49,11 @@ namespace TempMonitor.Service
 
             _lastAlarmTime[key] = DateTime.Now;
 
-            string level = (value > high * 1.2 || value < low * 0.8) ? "Critical" : "Alarm";
+            // 临界阈值：用绝对值偏移确保正负阈值都朝更极端方向扩展
+            string level =
+                (value > high + Math.Abs(high) * 0.2 || value < low - Math.Abs(low) * 0.2)
+                    ? "Critical"
+                    : "Alarm";
 
             var record = new AlarmRecord
             {

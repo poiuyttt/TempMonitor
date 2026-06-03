@@ -34,6 +34,9 @@ namespace TempMonitor.Service
                 _serialPort.ReadTimeout = 2000;
                 _serialPort.WriteTimeout = 2000;
                 _serialPort.Open();
+                // 某些 USB 转 RS485 模块需要 DTR/RTS 提供工作电源
+                _serialPort.DtrEnable = true;
+                _serialPort.RtsEnable = true;
             }
             catch (Exception ex)
             {

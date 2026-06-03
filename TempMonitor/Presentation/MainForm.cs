@@ -106,6 +106,7 @@ namespace TempMonitor
                 BorderWidth = 2,
                 Color = Color.Red,
                 YAxisType = AxisType.Primary,
+                XValueType = ChartValueType.DateTime,
             };
             var seriesHumid = new Series
             {
@@ -114,6 +115,7 @@ namespace TempMonitor
                 BorderWidth = 2,
                 Color = Color.Blue,
                 YAxisType = AxisType.Secondary,
+                XValueType = ChartValueType.DateTime,
             };
             chartTemp.Series.Add(seriesTemp);
             chartTemp.Series.Add(seriesHumid);
@@ -161,14 +163,22 @@ namespace TempMonitor
 
         private void UpdateChart(SensorData data)
         {
-            chartTemp.Series["温度"].Points.AddXY(data.RecordTime, data.Temperature);
-            chartTemp.Series["湿度"].Points.AddXY(data.RecordTime, data.Humidity);
+            chartTemp.Series["温度"].Points.AddXY(data.RecordTime.ToOADate(), data.Temperature);
+            chartTemp.Series["湿度"].Points.AddXY(data.RecordTime.ToOADate(), data.Humidity);
 
+            // 滚动窗口：只保留最近 120 个点（约 2 分钟）
             while (chartTemp.Series["温度"].Points.Count > 120)
             {
                 chartTemp.Series["温度"].Points.RemoveAt(0);
                 chartTemp.Series["湿度"].Points.RemoveAt(0);
             }
+
+            // 手动固定 X 轴显示范围为最近 2 分钟，避免 Chart 自动缩放导致曲线越来越短
+            var axisX = chartTemp.ChartAreas[0].AxisX;
+            var now = DateTime.Now.ToOADate();
+            var twoMinutesAgo = DateTime.Now.AddSeconds(-120).ToOADate();
+            axisX.Minimum = twoMinutesAgo;
+            axisX.Maximum = now;
         }
 
         private void UpdateStatusColor(SensorData data)
@@ -187,7 +197,12 @@ namespace TempMonitor
         {
             try
             {
-                _modbus.Start(cmbPortName.Text, int.Parse(cmbBaudRate.Text), _config.Interval);
+                if (!int.TryParse(cmbBaudRate.Text, out int baudRate))
+                {
+                    MessageBox.Show("波特率格式不正确", "错误");
+                    return;
+                }
+                _modbus.Start(cmbPortName.Text, baudRate, _config.Interval);
                 btnStart.Enabled = false;
                 btnStop.Enabled = true;
             }

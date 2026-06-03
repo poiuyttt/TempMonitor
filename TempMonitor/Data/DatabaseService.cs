@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
@@ -124,12 +124,13 @@ namespace TempMonitor.Data
             {
                 conn.Open();
                 var cmd = new SQLiteCommand(
-                    $"DELETE FROM SensorData WHERE RecordTime < @date",
+                    "DELETE FROM SensorData WHERE RecordTime < @date",
                     conn
                 );
+                // 使用 Date + 00:00:00 确保截止日当天的数据也被清理
                 cmd.Parameters.AddWithValue(
                     "@date",
-                    DateTime.Now.AddDays(-retentionDays).ToString("yyyy-MM-dd")
+                    DateTime.Now.AddDays(-retentionDays).Date.ToString("yyyy-MM-dd HH:mm:ss")
                 );
                 cmd.ExecuteNonQuery();
             }

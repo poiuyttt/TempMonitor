@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Data.SQLite;
 using System.IO.Ports;
 using System.Windows.Forms;
 using TempMonitor.Config;
@@ -54,9 +55,21 @@ namespace TempMonitor.Presentation
         private void LoadUsers()
         {
             listUsers.Items.Clear();
-            var users = _db.GetAllUsers();
-            foreach (var user in users)
-                listUsers.Items.Add($"{user.Username} ({user.Role})");
+            try
+            {
+                var users = _db.GetAllUsers();
+                foreach (var user in users)
+                    listUsers.Items.Add($"{user.Username} ({user.Role})");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"加载用户列表失败：{ex.Message}",
+                    "错误",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
@@ -79,9 +92,18 @@ namespace TempMonitor.Presentation
                 LoadUsers();
                 MessageBox.Show("用户已添加", "提示");
             }
-            catch
+            catch (SQLiteException ex) when ((int)ex.ResultCode == 19) // SQLITE_CONSTRAINT
             {
                 MessageBox.Show("用户名已存在", "错误");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"添加用户失败：{ex.Message}",
+                    "错误",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
