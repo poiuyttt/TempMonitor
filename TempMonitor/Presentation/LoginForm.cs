@@ -28,7 +28,7 @@ namespace TempMonitor.Presentation
                 return;
             }
 
-            if (_userService.Login(txtUsername.Text.Trim(), txtPassword.Text))
+            if (_userService.Login(txtUsername.Text.Trim(), txtPassword.Text.Trim()))
             {
                 LoginSuccess = true;
                 _logService.Log(_userService.CurrentUser.Username, "登陆系统");

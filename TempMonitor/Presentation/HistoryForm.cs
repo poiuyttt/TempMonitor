@@ -20,7 +20,7 @@ namespace TempMonitor.Presentation
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            var data = _db.QuerySensorData(dtpStart.Value, dtpEnd.Value.AddDays(1));
+            var data = _db.QuerySensorData(dtpStart.Value.Date, dtpEnd.Value.Date.AddDays(1));
             dgvHistory.DataSource = data;
         }
 
@@ -32,7 +32,10 @@ namespace TempMonitor.Presentation
                 dlg.FileName = $"历史数据_{DateTime.Now:yyyyMMdd}.xlsx";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    var data = _db.QuerySensorData(dtpStart.Value, dtpEnd.Value.AddDays(1));
+                    var data = _db.QuerySensorData(
+                        dtpStart.Value.Date,
+                        dtpEnd.Value.Date.AddDays(1)
+                    );
                     _export.ExportToExcel(dlg.FileName, data);
                     MessageBox.Show($"已导出 {data.Count} 条");
                 }

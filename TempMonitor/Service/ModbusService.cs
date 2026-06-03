@@ -20,25 +20,38 @@ namespace TempMonitor.Service
         private Task _connectTask;
         private ConcurrentQueue<SensorData> _dataQueue = new ConcurrentQueue<SensorData>();
         private Timer _consumeTimer;
+        private int _collectInterval;
 
-        public bool IsConnceted => _serialPort != null && _serialPort.IsOpen;
+        public bool IsConnected => _serialPort != null && _serialPort.IsOpen;
 
-        public void Start(string portName, int baudRate)
+        public void Start(string portName, int baudRate, int interval)
         {
             try
             {
+                _collectInterval = interval;
                 _dataQueue = new ConcurrentQueue<SensorData>();
                 _serialPort = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
                 _serialPort.ReadTimeout = 2000;
                 _serialPort.WriteTimeout = 2000;
                 _serialPort.Open();
+            }
+            catch (Exception ex)
+            {
+                _serialPort?.Dispose();
+                _serialPort = null;
+                FireStatus("连接失败");
+                FireLog($"打开串口失败：{ex.Message}");
+                throw;
+            }
 
+            try
+            {
                 FireStatus("已连接");
                 FireLog($"串口已打开：{portName}，{baudRate}");
 
                 // 启动后台采集循环
                 _cts = new CancellationTokenSource();
-                _connectTask = Task.Run(() => CollectLoop(_cts.Token));
+                _connectTask = CollectLoop(_cts.Token);
 
                 _consumeTimer = new Timer();
                 _consumeTimer.Interval = 500;
@@ -49,10 +62,22 @@ namespace TempMonitor.Service
                 };
                 _consumeTimer.Start();
             }
-            catch (Exception ex)
+            catch
             {
-                FireStatus("连接失败");
-                FireLog($"打开串口失败：{ex.Message}");
+                _cts?.Cancel();
+                _cts?.Dispose();
+                _cts = null;
+                var port = _serialPort;
+                _serialPort = null;
+                if (port != null)
+                {
+                    try
+                    {
+                        port.Close();
+                    }
+                    catch { }
+                    port.Dispose();
+                }
                 throw;
             }
         }
@@ -95,90 +120,88 @@ namespace TempMonitor.Service
         /// </summary>
         private async Task CollectLoop(CancellationToken token)
         {
-            await Task.Run(
-                () =>
+            while (!token.IsCancellationRequested)
+            {
+                if (_serialPort == null || !_serialPort.IsOpen)
                 {
-                    while (!token.IsCancellationRequested)
+                    await Task.Delay(_collectInterval, token);
+                    continue;
+                }
+
+                try
+                {
+                    // 清空接收缓冲区，避免上一帧残留数据干扰
+                    _serialPort.DiscardInBuffer();
+
+                    byte[] cmd = { 0x01, 0x03, 0x03, 0x00, 0x00, 0x02, 0xC4, 0x4F };
+                    _serialPort.Write(cmd, 0, cmd.Length);
+                    await Task.Delay(100, token);
+
+                    // 等待响应，最多 500ms
+                    int waitTime = 0;
+                    while (_serialPort.BytesToRead < 9 && waitTime < 500)
                     {
-                        if (_serialPort == null || !_serialPort.IsOpen)
+                        await Task.Delay(50, token);
+                        waitTime += 50;
+                    }
+
+                    if (_serialPort.BytesToRead >= 9)
+                    {
+                        byte[] resp = new byte[9];
+                        _serialPort.Read(resp, 0, 9);
+
+                        // 丢弃缓冲区中可能残留的额外字节
+                        if (_serialPort.BytesToRead > 0)
+                            _serialPort.DiscardInBuffer();
+
+                        // 验证功能码（0x83 = 异常响应）
+                        if (resp[1] != 0x03)
                         {
-                            Thread.Sleep(1000);
+                            FireLog($"Modbus 异常响应：功能码=0x{resp[1]:X2}");
+                            await Task.Delay(_collectInterval, token);
                             continue;
                         }
 
-                        try
+                        // CRC 校验
+                        ushort calculatedCrc = CalculateCrc(resp, 0, 7);
+                        ushort receivedCrc = (ushort)((resp[8] << 8) | resp[7]);
+
+                        if (calculatedCrc != receivedCrc)
                         {
-                            // 清空接收缓冲区，避免上一帧残留数据干扰
-                            _serialPort.DiscardInBuffer();
-
-                            byte[] cmd = { 0x01, 0x03, 0x03, 0x00, 0x00, 0x02, 0xC4, 0x4F };
-                            _serialPort.Write(cmd, 0, cmd.Length);
-                            Thread.Sleep(100);
-
-                            // 等待响应，最多 500ms
-                            int waitTime = 0;
-                            while (_serialPort.BytesToRead < 9 && waitTime < 500)
-                            {
-                                Thread.Sleep(50);
-                                waitTime += 50;
-                            }
-
-                            if (_serialPort.BytesToRead >= 9)
-                            {
-                                byte[] resp = new byte[9];
-                                _serialPort.Read(resp, 0, 9);
-
-                                // 丢弃缓冲区中可能残留的额外字节
-                                if (_serialPort.BytesToRead > 0)
-                                    _serialPort.DiscardInBuffer();
-
-                                // 验证功能码（0x83 = 异常响应）
-                                if (resp[1] != 0x03)
-                                {
-                                    FireLog($"Modbus 异常响应：功能码=0x{resp[1]:X2}");
-                                    Thread.Sleep(1000);
-                                    continue;
-                                }
-
-                                // CRC 校验
-                                ushort calculatedCrc = CalculateCrc(resp, 0, 7);
-                                ushort receivedCrc = (ushort)((resp[8] << 8) | resp[7]);
-
-                                if (calculatedCrc != receivedCrc)
-                                {
-                                    FireLog("CRC 校验失败，数据已丢弃");
-                                    Thread.Sleep(1000);
-                                    continue;
-                                }
-
-                                // 解析温度（第3~4字节，大端，÷10）
-                                int tempRaw = (resp[3] << 8) + resp[4];
-                                double temperature = Math.Round(tempRaw / 10.0, 1);
-
-                                // 解析湿度（第5~6字节，大端，÷10）
-                                int humidRaw = (resp[5] << 8) + resp[6];
-                                double humidity = Math.Round(humidRaw / 10.0, 1);
-
-                                var data = new SensorData
-                                {
-                                    Temperature = temperature,
-                                    Humidity = humidity,
-                                    RecordTime = DateTime.Now,
-                                };
-
-                                _dataQueue.Enqueue(data);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            FireLog($"采集异常：{ex.Message}");
+                            FireLog("CRC 校验失败，数据已丢弃");
+                            await Task.Delay(_collectInterval, token);
+                            continue;
                         }
 
-                        Thread.Sleep(1000);
+                        // 解析温度（第3~4字节，大端，÷10）
+                        int tempRaw = (resp[3] << 8) + resp[4];
+                        double temperature = Math.Round(tempRaw / 10.0, 1);
+
+                        // 解析湿度（第5~6字节，大端，÷10）
+                        int humidRaw = (resp[5] << 8) + resp[6];
+                        double humidity = Math.Round(humidRaw / 10.0, 1);
+
+                        var data = new SensorData
+                        {
+                            Temperature = temperature,
+                            Humidity = humidity,
+                            RecordTime = DateTime.Now,
+                        };
+
+                        _dataQueue.Enqueue(data);
                     }
-                },
-                token
-            );
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    FireLog($"采集异常：{ex.Message}");
+                }
+
+                await Task.Delay(_collectInterval, token);
+            }
         }
 
         private ushort CalculateCrc(byte[] data, int offset, int length)

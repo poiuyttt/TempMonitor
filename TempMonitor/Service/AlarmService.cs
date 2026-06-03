@@ -49,7 +49,7 @@ namespace TempMonitor.Service
 
             _lastAlarmTime[key] = DateTime.Now;
 
-            string level = value > high * 1.2 ? "Critical" : "Alarm";
+            string level = (value > high * 1.2 || value < low * 0.8) ? "Critical" : "Alarm";
 
             var record = new AlarmRecord
             {

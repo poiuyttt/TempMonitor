@@ -187,7 +187,7 @@ namespace TempMonitor
         {
             try
             {
-                _modbus.Start(cmbPortName.Text, int.Parse(cmbBaudRate.Text));
+                _modbus.Start(cmbPortName.Text, int.Parse(cmbBaudRate.Text), _config.Interval);
                 btnStart.Enabled = false;
                 btnStop.Enabled = true;
             }
@@ -240,7 +240,7 @@ namespace TempMonitor
 
         private void btnSettings_Click(object sender, System.EventArgs e)
         {
-            using (var form = new SettingsForm(_config, _log, _user.CurrentUser?.Username))
+            using (var form = new SettingsForm(_config, _log, _user.CurrentUser?.Username, _db))
                 form.ShowDialog();
         }
 

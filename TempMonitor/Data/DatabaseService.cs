@@ -153,7 +153,9 @@ namespace TempMonitor.Data
                     {
                         return new UserInfo
                         {
+                            Id = Convert.ToInt32(reader["Id"]),
                             Username = reader["Username"].ToString(),
+                            Password = reader["Password"].ToString(),
                             Role = reader["Role"].ToString(),
                         };
                     }
@@ -191,6 +193,49 @@ namespace TempMonitor.Data
                     conn
                 );
                 cmd.Parameters.AddWithValue("@id", alarmId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>获取所有用户列表</summary>
+        public List<UserInfo> GetAllUsers()
+        {
+            var list = new List<UserInfo>();
+            using (var conn = new SQLiteConnection(_connectionString))
+            {
+                conn.Open();
+                var cmd = new SQLiteCommand("SELECT Id, Username, Role FROM Users", conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(
+                            new UserInfo
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Username = reader["Username"].ToString(),
+                                Role = reader["Role"].ToString(),
+                            }
+                        );
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>添加用户（明文密码，调用方需自行处理安全）</summary>
+        public void AddUser(string username, string password, string role = "Operator")
+        {
+            using (var conn = new SQLiteConnection(_connectionString))
+            {
+                conn.Open();
+                var cmd = new SQLiteCommand(
+                    "INSERT INTO Users (Username, Password, Role) VALUES (@username, @password, @role)",
+                    conn
+                );
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@role", role);
                 cmd.ExecuteNonQuery();
             }
         }

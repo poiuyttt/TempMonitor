@@ -13,9 +13,9 @@ namespace TempMonitor.Service.Interfaces
 
         event Action<string> OnLogProduced;
 
-        bool IsConnceted { get; }
+        bool IsConnected { get; }
 
-        void Start(string portName, int baudRate);
+        void Start(string portName, int baudRate, int interval);
 
         void Stop();
     }

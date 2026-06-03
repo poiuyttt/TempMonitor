@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Data.SQLite;
-using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
 using TempMonitor.Config;
+using TempMonitor.Data;
 using TempMonitor.Service.Interfaces;
 
 namespace TempMonitor.Presentation
@@ -13,13 +12,20 @@ namespace TempMonitor.Presentation
         private readonly AppConfig _config;
         private readonly IOperationLogService _logService;
         private readonly string _currentUser;
+        private readonly DatabaseService _db;
 
-        public SettingsForm(AppConfig config, IOperationLogService logService, string currentUser)
+        public SettingsForm(
+            AppConfig config,
+            IOperationLogService logService,
+            string currentUser,
+            DatabaseService db
+        )
         {
             InitializeComponent();
             _config = config;
             _logService = logService;
             _currentUser = currentUser;
+            _db = db;
 
             LoadSettings();
             LoadPortNames();
@@ -48,23 +54,9 @@ namespace TempMonitor.Presentation
         private void LoadUsers()
         {
             listUsers.Items.Clear();
-            string dbPath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Data",
-                "TempMonitor.db"
-            );
-            if (!File.Exists(dbPath))
-                return;
-            using (var conn = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
-            {
-                conn.Open();
-                var cmd = new SQLiteCommand("SELECT Username, Role FROM Users", conn);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                        listUsers.Items.Add($"{reader["Username"]} ({reader["Role"]})");
-                }
-            }
+            var users = _db.GetAllUsers();
+            foreach (var user in users)
+                listUsers.Items.Add($"{user.Username} ({user.Role})");
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
@@ -80,32 +72,16 @@ namespace TempMonitor.Presentation
             if (string.IsNullOrWhiteSpace(password))
                 return;
 
-            string dbPath = Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
-                "Data",
-                "TempMonitor.db"
-            );
-
-            using (var conn = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
+            try
             {
-                conn.Open();
-                try
-                {
-                    var cmd = new SQLiteCommand(
-                        "INSERT INTO Users (Username, Password, Role) VALUES (@username, @password, 'Operator')",
-                        conn
-                    );
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.ExecuteNonQuery();
-                    _logService.Log(_currentUser, $"添加用户：{username}");
-                    LoadUsers();
-                    MessageBox.Show("用户已添加", "提示");
-                }
-                catch
-                {
-                    MessageBox.Show("用户名已存在", "错误");
-                }
+                _db.AddUser(username, password);
+                _logService.Log(_currentUser, $"添加用户：{username}");
+                LoadUsers();
+                MessageBox.Show("用户已添加", "提示");
+            }
+            catch
+            {
+                MessageBox.Show("用户名已存在", "错误");
             }
         }
 

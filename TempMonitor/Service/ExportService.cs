@@ -45,6 +45,9 @@ namespace TempMonitor.Service
 
             using (var fs = new FileStream(filePath, FileMode.Create))
                 workbook.Write(fs);
+
+            workbook.Close();
+            workbook = null;
         }
     }
 }
